@@ -22,7 +22,15 @@ connectDB();
 startCronJobs(); 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://taskhub-frontend-two.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 // Profile photos are currently sent as Base64 strings. They are larger than
 // the original files, so 5 MB is not enough for a project with several members.
 app.use(express.json({ limit: "15mb" }));
